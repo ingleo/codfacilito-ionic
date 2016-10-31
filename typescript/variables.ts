@@ -107,5 +107,4 @@ console.log(ingeniero2.darNombreCompleto());
 
 console.log(ingeniero2.darNombreLeet("dennis"));
 
-
 console.log("Conteo de personas es: " + Persona.numPersonas);
