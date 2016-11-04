@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Transaction } from '../../database';
+import { Adding } from '../adding/adding';
 
 /*
   Generated class for the Transactions page.
@@ -14,11 +16,27 @@ import { NavController } from 'ionic-angular';
 export class Transactions {
 
   title: string = "Movimientos";
-  
-  constructor(public navCtrl: NavController) {}
+  transactions: any;
+  addingPage = Adding;
 
-  ionViewDidLoad() {
-    console.log('Hello Transactions Page');
+  constructor(public navCtrl: NavController) { }
+
+  /*ionViewDidLoad() {
+    //let transaction = new Transaction(20, "Primera transaccion");
+    //transaction.save();
+    this.loadTransactions();
+  }*/
+
+  ionViewWillEnter(){
+    this.loadTransactions();
+  }
+
+
+  loadTransactions(){
+    Transaction.all().then((resultado) =>{
+      this.transactions = resultado;
+      console.log(this.transactions);
+    });
   }
 
 }
