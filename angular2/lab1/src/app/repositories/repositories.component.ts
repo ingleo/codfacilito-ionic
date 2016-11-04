@@ -6,6 +6,7 @@ import { RepositoriesService } from './repositories.service';
   templateUrl: './repositories.component.html',
   styleUrls: ['./repositories.component.css']
 })
+
 export class RepositoriesComponent implements OnInit {
 
   repositories: any = [];
@@ -43,7 +44,6 @@ export class RepositoriesComponent implements OnInit {
     this.newRepository = { name: "", description: "" };
   }
 }
-
 
 interface IRepository {
   name: string,
