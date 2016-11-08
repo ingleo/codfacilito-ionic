@@ -21,7 +21,7 @@ export class RepositoriesComponent implements OnInit {
         this.repositories = data.json();
         this.repository = this.repositories[0];
       })
-    })
+    },3000)
 
     /* setTimeout(() => {
        this.repositories = [
