@@ -1,4 +1,4 @@
-import Dexie from 'dexie';
+import Dexie from '../node_modules/dexie/dist/dexie';
 
 export class TransactionAppDB extends Dexie {
 
