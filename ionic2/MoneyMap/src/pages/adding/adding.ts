@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Transaction } from '../../database';
+import { GeolocationService } from '../../services/geolocation.service';
 
 /*
   Generated class for the Adding page.
@@ -15,20 +16,36 @@ import { Transaction } from '../../database';
 export class Adding {
 
   model: Transaction;
+  shouldGeolocate: boolean = false;
+  shouldSend: boolean = true;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public geolocator: GeolocationService) { }
 
   ionViewDidLoad() {
-    this.model = new Transaction(null,"");
-    //console.log('Hello Adding Page');
+    this.model = new Transaction(null, "");
   }
 
-  save(){
-    this.model.save().then((resultado) => {
-      this.model = new Transaction(null, "");
-    });
-
-    this.navCtrl.pop();
+  //método para obtener geolocalizacion
+  getLocation() {
+    if (this.shouldGeolocate) {
+      this.shouldSend = false;
+      this.geolocator.get().then((resultado) => {
+        this.model.setCoords(resultado.coords);
+        console.log(this.model);
+        this.shouldSend = true;
+      }).catch((err) => console.log(err));
+    } else {
+      this.model.cleanCoords();
+      console.log(this.model);
+    }
   }
 
+  save() {
+    if (this.shouldSend) {
+      this.model.save().then(resultado => {
+        this.model = new Transaction(null, "");
+         this.navCtrl.pop();
+      });  
+    }
+  }
 }
