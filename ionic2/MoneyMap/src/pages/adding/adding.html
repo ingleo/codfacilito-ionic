@@ -16,12 +16,12 @@
 <ion-content padding>
 	<ion-item>
 		<ion-label floating>Descripción</ion-label>
-		<ion-input type="text" [(ngModel)]="model.title" ></ion-input>
+		<ion-input type="text" [(ngModel)]="model.title"></ion-input>
 	</ion-item>
 
 	<ion-item>
 		<ion-label floating>Monto</ion-label>
-		<ion-input type="number" [(ngModel)]="model.amount" ></ion-input>
+		<ion-input type="number" [(ngModel)]="model.amount"></ion-input>
 	</ion-item>
 
 	<ion-item>
@@ -29,8 +29,15 @@
 		<ion-toggle [(ngModel)]="shouldGeolocate" (ionChange)="getLocation()"></ion-toggle>
 	</ion-item>
 
-  <div class="actions">
-    <button ion-button (click)="save()" [disabled]="!shouldSend">Agregar</button>
-  </div>
+	<div class="actions">
+		<button ion-button clear (click)="getPhoto()">
+			<ion-icon name="add"></ion-icon>
+			Agregar foto
+		</button>
+	</div>
+
+	<div class="actions">
+		<button ion-button (click)="save()" [disabled]="!shouldSend">Agregar</button>
+	</div>
 
 </ion-content>

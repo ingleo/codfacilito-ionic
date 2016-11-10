@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Transaction } from '../../database';
 import { GeolocationService } from '../../services/geolocation.service';
+import { Camera, CameraOptions } from 'ionic-native'
 
 /*
   Generated class for the Adding page.
@@ -40,6 +41,7 @@ export class Adding {
     }
   }
 
+  //método para guardar el modelo
   save() {
     if (this.shouldSend) {
       this.model.save().then(resultado => {
@@ -47,5 +49,20 @@ export class Adding {
          this.navCtrl.pop();
       });  
     }
+  }
+
+  //método para abrir camara
+  getPhoto(){
+    let cameraOptions: CameraOptions = {
+      quality: 80,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: false,
+      encodingType: Camera.EncodingType.JPEG
+    };
+
+    Camera.getPicture(cameraOptions).then((imageData) => {
+      alert(imageData);
+    }).catch(err => console.log(err));
   }
 }
